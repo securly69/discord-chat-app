@@ -27,6 +27,32 @@ export default function CreateServerPage() {
     setError('')
 
     try {
+      // 1. Ensure user exists in our DB (sync if needed)
+      // This is crucial because the Clerk webhook might not have fired yet
+      const { data: existingUser } = await supabase
+        .from('users')
+        .select('id')
+        .eq('id', userId)
+        .single();
+
+      if (!existingUser) {
+        // Fallback: Insert user manually if missing
+        // In a real app, you might fetch details from Clerk API, but here we use basic info we have/can guess
+        const { error: userInsertError } = await supabase.from('users').insert({
+          id: userId,
+          clerk_id: userId,
+          username: 'user_' + userId.slice(0, 8), // Temporary username
+          email: 'temp@example.com', // Placeholder if we can't get it easily on client without more calls
+          status: 'online',
+        });
+
+        if (userInsertError) {
+          console.error('Failed to auto-create user', userInsertError);
+          // We continue anyway, hoping it might just be a race condition or RLS issue
+        }
+      }
+
+
       // Create server
       const { data: server, error: serverError } = await supabase
         .from('servers')
@@ -38,7 +64,10 @@ export default function CreateServerPage() {
         .select()
         .single()
 
-      if (serverError) throw serverError
+      if (serverError) {
+        console.error('Server creation specific error:', serverError);
+        throw serverError
+      }
 
       // Create general channel
       const { error: channelError } = await supabase
