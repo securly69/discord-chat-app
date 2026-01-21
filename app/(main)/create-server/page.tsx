@@ -74,113 +74,77 @@ export default function CreateServerPage() {
   }
 
   return (
-    <div className="p-6 flex items-center justify-center min-h-[calc(100vh-3.5rem)]">
-      <div className="w-full max-w-md">
+    <div className="p-6 flex justify-center h-full overflow-y-auto bg-[#313338]">
+      <div className="w-full max-w-md my-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Create a Server</h1>
-          <p className="text-slate-400">Start your own community</p>
+          <h1 className="text-2xl font-bold text-[#F2F3F5] mb-2">Create Your Server</h1>
+          <p className="text-[#B5BAC1]">Your server is where you and your friends hang out. Make yours and start talking.</p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleCreateServer} className="bg-slate-800 border border-slate-700 rounded-lg p-6">
-          {error && (
-            <div className="mb-4 p-3 bg-red-600/20 border border-red-600 rounded-lg text-red-400 text-sm">
-              {error}
-            </div>
-          )}
-
-          <div className="space-y-6">
-            {/* Server Icon Preview */}
-            <div className="flex justify-center">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold">
-                {serverName.charAt(0).toUpperCase() || '+'}
+        <form onSubmit={handleCreateServer} className="bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-lg p-0 overflow-hidden shadow-sm">
+          {/* Upload Container - Simulated */}
+          <div className="flex justify-center pt-6 pb-2">
+            <div className="relative">
+              <div className="w-24 h-24 rounded-full border-2 border-dashed border-[#B5BAC1] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors">
+                <div className="flex flex-col items-center">
+                  <span className="text-[#4E5058] font-bold text-xs uppercase mb-1">Upload</span>
+                  <svg className="w-6 h-6 text-[#5865F2]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" /></svg>
+                </div>
               </div>
+              {serverName && (
+                <div className="absolute inset-0 bg-[#5865F2] rounded-full flex items-center justify-center text-white text-3xl font-bold pointer-events-none">
+                  {serverName.charAt(0).toUpperCase()}
+                </div>
+              )}
             </div>
+          </div>
+
+          <div className="p-6">
+            {error && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-400 rounded text-red-700 text-sm">
+                {error}
+              </div>
+            )}
 
             {/* Server Name */}
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Server Name</label>
+            <div className="mb-6">
+              <label className="block text-xs font-bold text-[#4E5058] uppercase mb-2">Server Name</label>
               <input
                 type="text"
                 value={serverName}
                 onChange={e => setServerName(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors"
-                placeholder="My Awesome Server"
+                className="w-full px-3 py-2.5 bg-[#E3E5E8] rounded-[3px] text-[#313338] placeholder-[#949BA4] focus:outline-none focus:ring-2 focus:ring-[#5865F2] transition-all font-medium"
+                placeholder="My Server"
                 maxLength={32}
               />
-              <p className="text-xs text-slate-500 mt-1">{serverName.length}/32 characters</p>
+              <p className="text-xs text-[#5C5E66] mt-1 text-right">
+                By creating a server, you agree to Cordis's <span className="text-[#00A8FC] cursor-pointer">Community Guidelines</span>.
+              </p>
             </div>
+          </div>
 
-            {/* Server Description */}
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Description (Optional)</label>
-              <textarea
-                value={serverDescription}
-                onChange={e => setServerDescription(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors resize-none"
-                placeholder="What's your server about?"
-                rows={3}
-                maxLength={120}
-              />
-              <p className="text-xs text-slate-500 mt-1">{serverDescription.length}/120 characters</p>
-            </div>
 
-            {/* Features List */}
-            <div className="bg-slate-700/50 rounded-lg p-4">
-              <p className="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-3">Included</p>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                  </svg>
-                  Text channels
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                  </svg>
-                  Voice channels
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                  </svg>
-                  Invite members
-                </li>
-                <li className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                  </svg>
-                  Full admin control
-                </li>
-              </ul>
-            </div>
-
-            {/* Create Button */}
-            <button
-              type="submit"
-              disabled={isCreating}
-              className="w-full px-6 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-colors"
-            >
-              {isCreating ? 'Creating Server...' : 'Create Server'}
-            </button>
-
-            {/* Cancel Button */}
+          {/* Footer Actions */}
+          <div className="bg-[#F2F3F5] p-4 flex justify-between items-center">
             <button
               type="button"
               onClick={() => router.back()}
-              className="w-full px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-semibold transition-colors"
+              className="px-6 py-2.5 hover:underline text-[#313338] font-medium text-sm transition-colors"
             >
-              Cancel
+              Back
+            </button>
+
+            <button
+              type="submit"
+              disabled={isCreating}
+              className="px-8 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-[3px] font-medium text-sm transition-colors shadow-sm"
+            >
+              {isCreating ? 'Creating...' : 'Create'}
             </button>
           </div>
         </form>
-
-        {/* Info */}
-        <p className="text-center text-slate-500 text-xs mt-6">
-          Creating a server means you and your friends can have your own community space.
-        </p>
       </div>
     </div>
   )
