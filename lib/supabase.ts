@@ -6,16 +6,20 @@ import { createClient } from '@supabase/supabase-js'
 // NEXT_PUBLIC_SUPABASE_ANON_KEY (public/anon key)
 // SUPABASE_SERVICE_ROLE_KEY (service role key - server-side only)
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLIC_KEY || ''
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET || ''
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('[v0] Missing Supabase configuration. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY')
-}
-
+// Client for use in the browser/client-side components
+// Uses the anonymous key which is safe to expose
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+
+// Admin client for use in API routes / server actions ONLY
+// This will be undefined on the client-side because the secret key isn't exposed
+export const supabaseAdmin = supabaseServiceKey
+  ? createClient(supabaseUrl, supabaseServiceKey)
+  : (null as any) // Cast to any to avoid type errors on client, but will fail if used
+
 
 export type User = {
   id: string
