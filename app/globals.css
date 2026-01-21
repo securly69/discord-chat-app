@@ -4,13 +4,15 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Disclaimer: Approximate Discord Light Theme (not often used but good for completeness) */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.49 0.27 295);
+  /* Discord Blurple */
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -23,60 +25,67 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
+  --radius: 0.5rem;
+
+  /* Sidebar variables */
+  --sidebar: oklch(0.93 0.02 260);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary: oklch(0.49 0.27 295);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent: oklch(0.9 0.02 260);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* Discord Dark Theme */
+  --background: #313338;
+  /* Main chat area */
+  --foreground: #F2F3F5;
+
+  --card: #2B2D31;
+  --card-foreground: #F2F3F5;
+
+  --popover: #111214;
+  /* Deepest black for popovers */
+  --popover-foreground: #F2F3F5;
+
+  --primary: #5865F2;
+  /* Blurple */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #2B2D31;
+  --secondary-foreground: #F2F3F5;
+
+  --muted: #1E1F22;
+  --muted-foreground: #B5BAC1;
+
+  --accent: #3F4147;
+  /* Hover states */
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #DA373C;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #1E1F22;
+  --input: #1E1F22;
+  --ring: #5865F2;
+  /* Blurple ring */
+
+  /* Discord Specific sidebar colors */
+  --sidebar: #2B2D31;
+  /* Channel list */
+  --sidebar-foreground: #949BA4;
+  --sidebar-primary: #5865F2;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #35373C;
+  --sidebar-accent-foreground: #F2F3F5;
+  --sidebar-border: #1E1F22;
+  --sidebar-ring: #5865F2;
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -96,15 +105,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -113,12 +114,22 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Custom Discord Colors for explicit usage */
+  --color-discord-bg: #313338;
+  --color-discord-sidebar: #2B2D31;
+  --color-discord-server: #1E1F22;
+  --color-discord-blurple: #5865F2;
+  --color-discord-green: #23A559;
+  --color-discord-red: #DA373C;
+  --color-discord-yellow: #F0B232;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
