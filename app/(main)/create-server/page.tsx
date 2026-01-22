@@ -70,7 +70,7 @@ export default function CreateServerPage() {
       }
 
       // Create general channel
-      const { error: channelError } = await supabase
+      const { data: channel, error: channelError } = await supabase
         .from('channels')
         .insert({
           server_id: server.id,
@@ -79,6 +79,8 @@ export default function CreateServerPage() {
           is_private: false,
           created_by: userId,
         })
+        .select()
+        .single()
 
       if (channelError) throw channelError
 
@@ -93,7 +95,7 @@ export default function CreateServerPage() {
 
       if (memberError) throw memberError
 
-      router.push(`/servers/${server.id}`)
+      router.push(`/channels/${channel.id}`)
     } catch (err) {
       console.error('Error creating server:', err)
       setError('Failed to create server')
